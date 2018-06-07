@@ -1,69 +1,108 @@
-// Global
-const romanNumerals = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
+var output = '';
 //Front-end
 $(document).ready(function(){
-  debugger;
   var input = prompt("Convert any number below 3,999 to roman numerals");
   checkInputValidity(input);
 });
 //Back-End
-
 function checkInputValidity(input){
-  //Check for invalid entries
   if (isNaN(input)) {
-    alert("Invalid input");
+    alert("No");
   } else if (input > 3999) {
-    alert("Invalid input");
+    alert("No");
   } else {
-    //validates and converts to proper type.
     alert("Valid Number");
-    var validatedInput = parseInt(input);
-
+    splitNumber(input);
   }
 }
-
-//function validatedInput(input){
-//  parseInt(input);
-//}
-
-//function basicNumberConversion(input) {
-//  alert(typeof input)
-//  if (input === 1) {
-//    input = romanNumerals[0];
-//    return input;
-//  } else if (input === 5) {
-//    input = romanNumerals[1];
-//  } else if (input === 10) {
-//    input = romanNumerals[2];
-//    return input;
-//  } else if (input === 50) {
-//    input = romanNumerals[3];
-//    return input;
-//  } else if (input === 100){
-//    input = romanNumerals[4];
-//    return input;
-//  } else if (input === 500) {
-//    input = romanNumerals[5];
-//    return input;
-//  } else if (input === 1000) {
-//    input = romanNumerals[6];
-//    return input;
-//  } else {
-//  }
-  //"1" =
-  //"5" = romanNumerals.indexOf(romanNumerals[1]);
-  //"10" = romanNumerals.indexOf(romanNumerals[2]);
-  //"50" = romanNumerals.indexOf(romanNumerals[3]);
-  //"100" = romanNumerals.indexOf(romanNumerals[4]);
-  //"500" = romanNumerals.indexOf(romanNumerals[5]);
-  //"1000" = romanNumerals.indexOf(romanNumerals[6]);
-//}
-//if ("input" === NaN) {
-//  "invalid input"
-//} else if ("input" > 3,999) {
-//  "invalid input"
-//} else if ( input === 1 || input === 5 || input === 10 || input === 50 || input === 100 || input === 500 || input === 1000 ) {
-//}
-//} else if (array.length > # && "input" > #) {
-
-//}
+function splitNumber(input) {
+  var numberArray = input.split('');
+  romanCheck(numberArray);
+}
+function romanCheck(numberArray){
+  for (i = numberArray.length-1; i >= 0 ; i--){
+    var currentValue = numberArray[i];
+    //ones
+    if (i === numberArray.length-1){
+      var ones1 = 'I';
+      var ones2 = 'V';
+      if(numberArray[i] === "1"){
+        output = output.concat(ones1);
+      } else if (numberArray[i] === "2"){
+        output = output.concat(ones1+ones1);
+      } else if (numberArray[i] === "3"){
+        output = output.concat(ones1+ones1+ones1);
+      } else if (numberArray[i] === "4"){
+        output = output.concat(ones2+ones1);
+      } else if (numberArray[i] === "5"){
+        output = output.concat(ones2);
+      } else if (numberArray[i] === "6"){
+        output = output.concat(ones1+ones2);
+      } else if (numberArray[i] === "7"){
+        output = output.concat(ones1+ones1+ones2);
+      } else if (numberArray[i] === "8"){
+        output = output.concat(ones2+ones1+ones1+ones1);
+      } else if (numberArray[i] === "9"){
+        output = output.concat("IX");
+      } else {
+      }
+    } else if (i === numberArray.length-2){
+      var ten1 = 'X';
+      var ten2 = 'L'
+      if(numberArray[i] === "1"){
+        output = output.concat(ten1);
+      } else if (numberArray[i] === "2"){
+        output = output.concat(ten1+ten1);
+      } else if (numberArray[i] === "3"){
+        output = output.concat(ten1+ten1+ten1);
+      } else if (numberArray[i] === "4"){
+        output = output.concat(ten2+ten1);
+      } else if (numberArray[i] === "5"){
+        output = output.concat(ten2);
+      } else if (numberArray[i] === "6"){
+        output = output.concat(ten1+ten2);
+      } else if (numberArray[i] === "7"){
+        output = output.concat(ten1+ten1+ten2);
+      } else if (numberArray[i] === "8"){
+        output = output.concat(ten1+ten1+ten1+ten2);
+      } else if (numberArray[i] === "9"){
+        output = output.concat("XC");
+      } else {
+      }
+    } else if (i === numberArray.length-3){
+      var hundred1 = 'C';
+      var hundred2 = 'D';
+      if(numberArray[i] === "1"){
+        output = output.concat(hundred1);
+      } else if (numberArray[i] === "2"){
+        output = output.concat(hundred1+hundred1);
+      } else if (numberArray[i] === "3"){
+        output = output.concat(hundred1+hundred1+hundred1);
+      } else if (numberArray[i] === "4"){
+        output = output.concat(hundred2+hundred1);
+      } else if (numberArray[i] === "5"){
+        output = output.concat(hundred2);
+      } else if (numberArray[i] === "6"){
+        output = output.concat(hundred1+hundred2);
+      } else if (numberArray[i] === "7"){
+        output = output.concat(hundred1+hundred1+hundred2);
+      } else if (numberArray[i] === "8"){
+        output = output.concat(hundred1+hundred1+hundred1+hundred2);
+      } else if (numberArray[i] === "9"){
+        output = output.concat("CM");
+      } else {
+      }
+    } else {
+      var thousand1 = 'M';
+      if(numberArray[i] === "1"){
+        output = output.concat(thousand1);
+      } else if (numberArray[i] === "2"){
+        output = output.concat(thousand1+thousand1);
+      } else if (numberArray[i] === "3"){
+        output = output.concat(thousand1+thousand1+thousand1);
+      } else {
+      }
+    }
+  }
+  var newOutput = output.split('').reverse().join('');
+}
